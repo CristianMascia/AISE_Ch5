@@ -1,16 +1,13 @@
 
 # Kubeflow Example
 
-In this example we wanto to show how to install, configure and use kubeflow. In particular, we show a simple pipeline for training a classifier (k-nearest neighbors) on the Iris dataset.
+This example demonstrates how to install, configure, and use Kubeflow. Specifically, we'll create a basic pipeline to train a k-nearest neighbors classifier on the Iris dataset.
 
-Kubeflow rely on kubernetes, so we need a local distribution of it. 
+Since Kubeflow is built on Kubernetes, you'll need to have a local Kubernetes distribution running before you begin.
 
+## Install Kind and Kubectl
 
-
-
-## Install Kind
-
-Kind is a tool for running local Kubernetes clusters using Docker container “nodes”.
+Kind is a tool for creating local Kubernetes clusters using Docker containers as nodes. You can manage these clusters using the Kubernetes command-line tool, kubectl.
 
 ### For Linux
 ```
@@ -22,6 +19,14 @@ Kind is a tool for running local Kubernetes clusters using Docker container “n
   #Run these for both architectures
   chmod +x ./kind
   sudo mv ./kind /usr/local/bin/kind
+
+
+  # For x86_64
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  # For ARM64
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
+
+  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
 
 ### macOS
@@ -35,30 +40,8 @@ Kind is a tool for running local Kubernetes clusters using Docker container “n
   #Run these for both architectures
   chmod +x ./kind
   mv ./kind /usr/local/bin/kind
-```
-
-### Windows (on Powershell)
-```
-  curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.24.0/kind-windows-amd64
-  Move-Item .\kind-windows-amd64.exe c:\some-dir-in-your-PATH\kind.exe
-```
 
 
-Finally, we have to install kubectl for seimplify the access to Kubernetes. 
-
-### For Linux
-
-```
-  # For x86_64
-  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-  # For ARM64
-  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
-
-  sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-```
-
-### For macOS
-```
   # For Intel
   curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/amd64/kubectl"
   # For M1 / ARM
@@ -69,14 +52,15 @@ Finally, we have to install kubectl for seimplify the access to Kubernetes.
   sudo chown root: /usr/local/bin/kubectl
 ```
 
-### For Windows
+### Windows (on Powershell)
+```
+  curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.24.0/kind-windows-amd64
+  Move-Item .\kind-windows-amd64.exe c:\some-dir-in-your-PATH\kind.exe
+```
+Install kubectl downloading it from https://kubernetes.io/releases/download/#binaries
 
-Donwload and install from https://kubernetes.io/releases/download/#binaries
-
-
-Finally, create the cluster with kind (Cosa fa?)
-
-
+## Set up a local Kubernetes cluster using Kind
+ 
 ```
 cristian-msi@cristian-msi-Vector-GP68HX-13VH:~/Documents$ kind create cluster --name=aise
 Creating cluster "aise" ...
@@ -95,8 +79,12 @@ Have a question, bug, or feature request? Let us know! https://kind.sigs.k8s.io/
 
 ```
 
-Deploy di kubeflow tramite manifest (cosa significa? STandalone?)
+## Deploy kubeflow
 
+Kubeflow can be deployed in various ways, including as standalone components or using the Kubeflow Platform. You can choose from package distributions or Kubeflow manifests. 
+We'll deploy Kubeflow as standalone components using manifests.
+
+> 📝 bla bla ...
 Aggiunre nota sul fatto che non ho ustilizzato l;ultima versione
 
 
