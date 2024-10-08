@@ -170,4 +170,4 @@ Some pods are created after the pipeline run and are marked as 'Completed' when 
 
 Going to the dashboard
 
-![pipeline_dashboard](/pipeline_dashboard.png)
+<img src="pipeline_dashboard.png" alt="drawing" width="200"/>
