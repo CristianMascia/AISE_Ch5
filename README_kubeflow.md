@@ -138,33 +138,34 @@ localhost:8080/#/runs/details/8543a968-6c6e-4716-bcb4-b12bde5041f5
 
 Some pods are created after the pipeline run and are marked as 'Completed' when they finish
 
-cristian-msi@cristian-msi-Vector-GP68HX-13VH:~/Documents$ kubectl get pods -n kubeflow
-NAME                                                              READY   STATUS             RESTARTS        AGE
-cache-deployer-deployment-f7dfbb98c-mj4j6                         1/1     Running            0               20m
-cache-server-7676b74c4c-286jb                                     1/1     Running            0               20m
-controller-manager-57488687d6-m6ssg                               1/1     Running            0               20m
-iris-training-pipeline-kc78z-system-container-driver-1793831555   0/2     Completed          0               68s
-iris-training-pipeline-kc78z-system-container-driver-851553022    0/2     Completed          0               2m56s
-iris-training-pipeline-kc78z-system-container-impl-1257429848     0/2     Completed          0               2m46s
-iris-training-pipeline-kc78z-system-container-impl-4043358533     0/2     Completed          0               58s
-iris-training-pipeline-kc78z-system-dag-driver-1046450884         0/2     Completed          0               8s
-iris-training-pipeline-kc78z-system-dag-driver-107824191          0/2     Completed          0               3m22s
-iris-training-pipeline-kc78z-system-dag-driver-2145114287         0/2     Completed          0               18s
-iris-training-pipeline-kc78z-system-dag-driver-3833327368         0/2     Completed          0               8s
-iris-training-pipeline-kc78z-system-dag-driver-972673396          0/2     Completed          0               8s
-metadata-envoy-deployment-5777f787c8-crx6h                        1/1     Running            0               20m
-metadata-grpc-deployment-8496ffb98b-492dl                         1/1     Running            7 (12m ago)     20m
-metadata-writer-c7f54cd7-gmzq6                                    1/1     Running            3 (8m11s ago)   20m
-minio-7c77bc59b8-ld6gp                                            1/1     Running            0               20m
-ml-pipeline-8fccd68b7-6fbvd                                       1/1     Running            4 (11m ago)     20m
-ml-pipeline-persistenceagent-6b9c4b7f88-6rxkb                     1/1     Running            2 (11m ago)     20m
-ml-pipeline-scheduledworkflow-7bdcd4c444-vr552                    1/1     Running            0               20m
-ml-pipeline-ui-7975cb7c84-2lkxd                                   1/1     Running            0               20m
-ml-pipeline-viewer-crd-868489f5f5-knqsj                           1/1     Running            0               20m
-ml-pipeline-visualizationserver-549b97f7c7-l984j                  1/1     Running            0               20m
-mysql-758cd66576-89dzw                                            1/1     Running            0               20m
-proxy-agent-694b64d5f4-zkrmg                                      0/1     CrashLoopBackOff   7 (56s ago)     20m
-workflow-controller-8679c8d76d-2hj22                              1/1     Running            0               20m
+```
+  cristian-msi@cristian-msi-Vector-GP68HX-13VH:~/Documents$ kubectl get pods -n kubeflow
+  NAME                                                              READY   STATUS             RESTARTS        AGE
+  cache-deployer-deployment-f7dfbb98c-mj4j6                         1/1     Running            0               20m
+  cache-server-7676b74c4c-286jb                                     1/1     Running            0               20m
+  controller-manager-57488687d6-m6ssg                               1/1     Running            0               20m
+  iris-training-pipeline-kc78z-system-container-driver-1793831555   0/2     Completed          0               68s
+  iris-training-pipeline-kc78z-system-container-driver-851553022    0/2     Completed          0               2m56s
+  iris-training-pipeline-kc78z-system-container-impl-1257429848     0/2     Completed          0               2m46s
+  iris-training-pipeline-kc78z-system-container-impl-4043358533     0/2     Completed          0               58s
+  iris-training-pipeline-kc78z-system-dag-driver-1046450884         0/2     Completed          0               8s
+  iris-training-pipeline-kc78z-system-dag-driver-107824191          0/2     Completed          0               3m22s
+  iris-training-pipeline-kc78z-system-dag-driver-2145114287         0/2     Completed          0               18s
+  iris-training-pipeline-kc78z-system-dag-driver-3833327368         0/2     Completed          0               8s
+  iris-training-pipeline-kc78z-system-dag-driver-972673396          0/2     Completed          0               8s
+  metadata-envoy-deployment-5777f787c8-crx6h                        1/1     Running            0               20m
+  metadata-grpc-deployment-8496ffb98b-492dl                         1/1     Running            7 (12m ago)     20m
+  metadata-writer-c7f54cd7-gmzq6                                    1/1     Running            3 (8m11s ago)   20m
+  minio-7c77bc59b8-ld6gp                                            1/1     Running            0               20m
+  ml-pipeline-8fccd68b7-6fbvd                                       1/1     Running            4 (11m ago)     20m
+  ml-pipeline-persistenceagent-6b9c4b7f88-6rxkb                     1/1     Running            2 (11m ago)     20m
+  ml-pipeline-scheduledworkflow-7bdcd4c444-vr552                    1/1     Running            0               20m
+  ml-pipeline-ui-7975cb7c84-2lkxd                                   1/1     Running            0               20m
+  ml-pipeline-viewer-crd-868489f5f5-knqsj                           1/1     Running            0               20m
+  ml-pipeline-visualizationserver-549b97f7c7-l984j                  1/1     Running            0               20m
+  mysql-758cd66576-89dzw                                            1/1     Running            0               20m
+  proxy-agent-694b64d5f4-zkrmg                                      0/1     CrashLoopBackOff   7 (56s ago)     20m
+  workflow-controller-8679c8d76d-2hj22                              1/1     Running            0               20m
 ```
 
 Going to the dashboard
