@@ -84,18 +84,12 @@ Have a question, bug, or feature request? Let us know! https://kind.sigs.k8s.io/
 Kubeflow can be deployed in various ways, including as standalone components or using the Kubeflow Platform. You can choose from package distributions or Kubeflow manifests. 
 We'll deploy Kubeflow as standalone components using manifests.
 
-> 📝 bla bla ...
-Aggiunre nota sul fatto che non ho ustilizzato l;ultima versione
-
-
 ```
-  export PIPELINE_VERSION=2.2.0
-  kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/cluster-scoped-resources?ref=$PIPELINE_VERSION"
+  kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/cluster-scoped-resources?ref=2.2.0"
   kubectl wait --for condition=established --timeout=60s crd/applications.app.k8s.io
-  kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/env/dev?ref=$PIPELINE_VERSION"
+  kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/env/dev?ref=2.2.0"
 ```
-
-SHow the deployments 
+> 📝 The latest version (2.3.0) has issues with accessing the dashboard.
 
 ```
   cristian-msi@cristian-msi-Vector-GP68HX-13VH:~/Documents$ kubectl get pods -n kubeflow
@@ -118,25 +112,32 @@ SHow the deployments
   workflow-controller-8679c8d76d-2hj22               1/1     Running            0               14m
 ```
 
-Aggiunfere nota sul fatto che il servizio agent-proxy crasha, e ercare il motivo
-Aggiungere nota sul fatto che qualche pods/servizio puo andare in CrashLoppBack ma poi si risolve
+> 📝 proxy-agent enters in CrashLoopBackOff, it will not be used. 
 
-
-E possibile accedere alla dashboard tramite il forwording (ovver?)
+To access the dashboard, we must connect to the ml-pipeline-ui service. Since the cluster's services are not externally accessible, we'll need to set up port forwarding
 
 ```
   cristian-msi@cristian-msi-Vector-GP68HX-13VH:~/Documents$ kubectl port-forward -n kubeflow svc/ml-pipeline-ui 8080:80
   Forwarding from 127.0.0.1:8080 -> 3000
   Forwarding from [::1]:8080 -> 3000  
 ```
+Now, the dashboard is accessible from: http://localhost:8080/pipeline/#
 
-Navigate to http://localhost:8080/pipeline/#
-
-
-
-Dopo aver runnato la pipeline con il comando...
+## Run the pipeline
 
 ```
+ cristian-msi@cristian-msi-Vector-GP68HX-13VH:~/Documents/AISE_Ch5$ python exmple_pipeline.py
+  /home/cristian-msi/anaconda3/envs/test_kubeflow/lib/python3.10/site-packages/kfp/dsl/component_decorator.py:121: FutureWarning: The default base_image used by the @dsl.component decorator will switch from 'python:3.8' to 'python:3.9' on Oct 1, 2024. To ensure your existing components work with versions of the KFP SDK released after that date, you should provide an explicit base_image argument and ensure your component works as intended on Python 3.9.
+  return component_factory.create_component_from_func(
+/home/cristian-msi/anaconda3/envs/test_kubeflow/lib/python3.10/site-packages/kfp/client/client.py:159: FutureWarning: This client only works with Kubeflow Pipeline v2.0.0-beta.2 and later versions.
+  warnings.warn(
+Experiment details: /pipeline/#/experiments/details/356bae17-25bc-44ad-bc60-eb41c3a5fee9
+Run details: /pipeline/#/runs/details/8543a968-6c6e-4716-bcb4-b12bde5041f5
+localhost:8080/#/runs/details/8543a968-6c6e-4716-bcb4-b12bde5041f5
+```
+
+Some pods are created after the pipeline run and are marked as 'Completed' when they finish
+
 cristian-msi@cristian-msi-Vector-GP68HX-13VH:~/Documents$ kubectl get pods -n kubeflow
 NAME                                                              READY   STATUS             RESTARTS        AGE
 cache-deployer-deployment-f7dfbb98c-mj4j6                         1/1     Running            0               20m
@@ -166,8 +167,6 @@ proxy-agent-694b64d5f4-zkrmg                                      0/1     CrashL
 workflow-controller-8679c8d76d-2hj22                              1/1     Running            0               20m
 ```
 
-Possiamo vedere come si sono aggiunte altre pod che risultano completate perche hanno temrinato il loro task
-
-Dalla dashboard si vede questo
+Going to the dashboard
 
 ![pipeline_dashboard](/pipeline_dashboard.png)
