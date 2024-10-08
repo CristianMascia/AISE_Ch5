@@ -168,6 +168,6 @@ Some pods are created after the pipeline run and are marked as 'Completed' when 
   workflow-controller-8679c8d76d-2hj22                              1/1     Running            0               20m
 ```
 
-Going to the dashboard
+In the dashboard, we can see the pipeline
 
-<img src="pipeline_dashboard.png" alt="drawing" width="200"/>
+<img src="pipeline_dashboard.png" alt="drawing" width="300"/>
