@@ -171,4 +171,4 @@ To access the application (for example from PostMan) we need the url.
 
 ## Sending a request using Postman
 
-![alt text](https://github.com/CristianMascia/AISE_Ch5/blob/main/postman.png?raw=true)
+![alt text](https://github.com/CristianMascia/AISE_Ch5/blob/main/img/postman.png?raw=true)
