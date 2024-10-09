@@ -122,6 +122,7 @@ To access the dashboard, we must connect to the ml-pipeline-ui service. Since th
   Forwarding from [::1]:8080 -> 3000  
 ```
 Now, the dashboard is accessible from: http://localhost:8080/pipeline/#
+> 📝 The Kubeflow Pipelines REST API is available under the /pipeline/ HTTP path
 
 ## Run the pipeline
 
