@@ -24,8 +24,7 @@ def normalize_dataset(input_iris_dataset: Input[Dataset], normalized_iris_datase
         raise Value('Exactly one of standard_scaler or min_max_scaler mustbe True.')
     
     import pandas as pd
-    from sklearn.preprocessing import MinMaxScaler
-    from sklearn.preprocessing import StandardScaler
+    from sklearn.preprocessing import MinMaxScaler, StandardScaler
     with open(input_iris_dataset.path) as f:
         df = pd.read_csv(f)
     
@@ -66,36 +65,28 @@ def train_model(normalized_iris_dataset: Input[Dataset],model: Output[Model],n_n
 @dsl.pipeline(name='iris-training-pipeline')
 def my_pipeline(standard_scaler: bool, min_max_scaler: bool, neighbors: List[int],):
     create_dataset_task = create_dataset()
-    
-    normalize_dataset_task = normalize_dataset(
-    
-    input_iris_dataset=create_dataset_task.outputs['iris_dataset'], standard_scaler=True, min_max_scaler=False)
-    
+    iris_df = create_dataset_task.outputs['iris_dataset']
+    normalize_dataset_task = normalize_dataset(input_iris_dataset=iris_df,standard_scaler=True, min_max_scaler=False)
+    norm_iris_df = normalize_dataset_task.outputs['normalized_iris_dataset']
     with dsl.ParallelFor(neighbors) as n_neighbors:
-        train_model(normalized_iris_dataset=normalize_dataset_task.outputs['normalized_iris_dataset'], n_neighbors=n_neighbors)
+        train_model(normalized_iris_dataset=norm_iris_df, n_neighbors=n_neighbors)
 
 
 client = Client()
-run = client.create_run_from_pipeline_func(my_pipeline, 
-                                               arguments={
-                                                        'min_max_scaler': True,
-                                                        'standard_scaler': False,
-                                                        'neighbors': [3, 6, 9]
-                                                        },)
-url = f'localhost:8080/#/runs/details/{run.run_id}'
-print(url)
+pipeline_args = {'min_max_scaler': True,
+                 'standard_scaler': False,
+                 'neighbors': [3, 6, 9]}
 
+run = client.create_run_from_pipeline_func(my_pipeline, arguments=pipeline_args)
 
-quit()
+#compiler.Compiler().compile(my_pipeline, 'pipeline.yaml')
 
-compiler.Compiler().compile(my_pipeline, 'pipeline.yaml')
-
-client = Client()
-run = client.create_run_from_pipeline_package(
-    'pipeline.yaml',
-    arguments={
-        'min_max_scaler': True,
-        'standard_scaler': False,
-        'neighbors': [3, 6, 9]
-    },
-)
+#client = Client()
+#run = client.create_run_from_pipeline_package(
+#    'pipeline.yaml',
+#    arguments={
+#        'min_max_scaler': True,
+#        'standard_scaler': False,
+#        'neighbors': [3, 6, 9]
+#    },
+#)
