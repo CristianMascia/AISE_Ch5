@@ -1,7 +1,7 @@
 
 # Kubeflow Example
 
-This example demonstrates how to install, configure, and use Kubeflow. Specifically, we'll create a basic pipeline to train a k-nearest neighbors classifier on the Iris dataset.
+This example demonstrates how to install, configure, and use Kubeflow. Specifically, we'll create a basic pipeline to train a k-nearest neighbours classifier on the Iris dataset.
 
 Since Kubeflow is built on Kubernetes, you'll need to have a local Kubernetes distribution running before you begin.
 
@@ -82,7 +82,7 @@ Have a question, bug, or feature request? Let us know! https://kind.sigs.k8s.io/
 ## Deploy kubeflow
 
 Kubeflow can be deployed in various ways, including as standalone components or using the Kubeflow Platform. You can choose from package distributions or Kubeflow manifests. 
-We'll deploy Kubeflow as standalone components using manifests.
+We'll deploy Kubeflow as a standalone component using manifests.
 
 ```
   kubectl apply -k "github.com/kubeflow/pipelines/manifests/kustomize/cluster-scoped-resources?ref=2.2.0"
@@ -121,7 +121,7 @@ To access the dashboard, we must connect to the ml-pipeline-ui service. Since th
   Forwarding from 127.0.0.1:8080 -> 3000
   Forwarding from [::1]:8080 -> 3000  
 ```
-Now, the dashboard is accessible from: http://localhost:8080/pipeline/#
+Now, the dashboard is accessible from http://localhost:8080/pipeline/#
 > 📝 The Kubeflow Pipelines REST API is available under the /pipeline/ HTTP path
 
 ## Run the pipeline
